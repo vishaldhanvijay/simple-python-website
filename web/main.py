@@ -1,21 +1,19 @@
-from bottle import run, error, install
+from bottle import run, install
 from bottle_sqlite import SQLitePlugin
 from data.config.config import Config
+from store.store import Store
+from store.connection import Connection
 import api.login
 import app.main
 import hello
+import errors
 
-install(SQLitePlugin(dbfile=Config.db_filename))
+config = Config()
 
+with Connection(config) as conn:
+    config = Config()
+    Store.migrate_db(config)
 
-@error(404)
-def error404(error):
-    return 'Nothing here, sorry'
-
-
-@error(500)
-def error500(error):
-    return 'Oops!'
-
+install(SQLitePlugin(dbfile=config.db_filename))
 
 run(host='localhost', port=9999)

@@ -9,7 +9,7 @@ class Config:
     ENV_PASSWORD_SECRET = 'SPW_PASSWORD_SECRET'
 
     def __init__(self,
-                 db_filename='../data/database/test1.db',
+                 db_filename='../data/database/test.db',
                  migrations_directory='../data/migrations',
                  cookie_secret='some-secret-value',
                  password_secret='some-other-secret-value'):
