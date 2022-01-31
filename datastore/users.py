@@ -18,4 +18,10 @@ def verify_hash(config, password, password_hash):
         return False
 
 
+def get_user(db, username):
+    row = db.execute('SELECT firstname from users where username=?', (username,)).fetchone()
+    if row:
+        return row['firstname']
+    else:
+        return username
 

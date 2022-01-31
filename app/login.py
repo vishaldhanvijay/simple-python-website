@@ -1,27 +1,23 @@
-from bottle import get, request, route, template
+from bottle import get, request, route, template, view
+from data.config import Config
 
 
 @get('/login')
 def login():
-    return '''
-        <form action="/login" method="post">
-            Username: <input name="username" type="text" />
-            Password: <input name="password" type="password" />
-            <input value="Login" type="submit" />
-        </form>
-    '''
+    return template('login_form')
 
 
 @route('/restricted')
+@view('restricted')
 def restricted_area():
-    cookie_content = request.get_cookie("account", secret='some-secret-key')
+    cookie_content = request.get_cookie("account", secret=Config.config.cookie_secret)
     username = None
+    name = None
     client_ip = None
     if cookie_content:
         username = cookie_content['username']
         client_ip = cookie_content['client-ip']
-    if username:
-        return template("Hello {{name}} from {{ip}}. Welcome back.", name=username, ip=client_ip)
-    else:
-        return "You are not logged in. Access denied. <p><a href=\"/login\">Login</a></p>"
+        name = cookie_content['real-name']
+
+    return dict(name=name, ip=client_ip)
 
