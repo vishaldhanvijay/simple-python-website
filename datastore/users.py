@@ -1,5 +1,4 @@
 import hashlib
-from store.main import Store
 
 
 def calculate_password_hash(config, password):
@@ -12,7 +11,9 @@ def calculate_password_hash(config, password):
 
 
 def verify_hash(config, password, password_hash):
-    if password_hash == calculate_password_hash(config, password):
+    calculated_hash = calculate_password_hash(config, password)
+    print(f'verifying password: {password}, real hash: {password_hash}, calculated_hash: {calculated_hash}')
+    if calculated_hash == password_hash:
         return True
     else:
         return False

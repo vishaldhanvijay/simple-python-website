@@ -1,10 +1,12 @@
 import sqlite3
 from sqlite3 import Error
+import os
 
 
 class Connection(object):
-    def __init__(self, config):
-        self.config = config
+    def __init__(self, conf):
+        self.config = conf
+        self.database_filename = file = os.path.join(conf.data_directory, conf.db_filename)
         self.db_connection = None
 
     def __enter__(self):

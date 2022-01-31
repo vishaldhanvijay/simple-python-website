@@ -13,7 +13,7 @@
         {
             "version": 3,
             "comment": "default password is admin-password",
-            "sql": "insert into users values('1', 'admin', '861dc45fb50349654a615674099ed594', 1, current_date, '', 'Administrator');"
+            "sql": "insert into users values('1', 'admin', '4948b5e770c4703cfaf8cff5e04730b9', 1, CURRENT_TIMESTAMP, '', 'Administrator');"
         }
     ]
 }

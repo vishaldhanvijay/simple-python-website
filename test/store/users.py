@@ -1,6 +1,6 @@
 import unittest
-import store.users as users
-from data.config.config import Config
+import datastore.users as users
+from data.config import Config
 
 
 class UsersTest(unittest.TestCase):
@@ -24,6 +24,7 @@ class UsersTest(unittest.TestCase):
 
     def test_generate_hash(self):
         password = 'admin-password'
-        hash = users.calculate_password_hash(self.config, password)
+        Config()
+        hash = users.calculate_password_hash(Config.config, password)
         print(f'Generated a MD5 hash for "{password}" => {hash}')
         assert True

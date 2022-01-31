@@ -1,12 +1,17 @@
-from bottle import get, post, request, response, route, template, error
+from bottle import get, post, request, response, route, template
+from datastore import users
+from data.config import Config
 
 
-def check_login(username, password):
-    print(f'{username} {password}')
-    return username == 'Jarkko' and password == 'Lakso'
+def check_login(db, username, password):
+    row = db.execute('SELECT username, password from users where username=?', (username,)).fetchone()
+    if row:
+        print(f"found user: {row['username']}")
+        return users.verify_hash(Config.config, password, row['password'])
+    return False
 
 
-@get('/login') # or @route('/login')
+@get('/login')
 def login():
     return '''
         <form action="/login" method="post">
@@ -18,10 +23,10 @@ def login():
 
 
 @post('/login')
-def do_login():
+def do_login(db):
     username = request.forms.get('username')
     password = request.forms.get('password')
-    if check_login(username, password):
+    if check_login(db, username, password):
         cookie_content = {
             'username': username,
             'client-ip': request.remote_addr
@@ -37,6 +42,7 @@ def do_login():
 def restricted_area():
     cookie_content = request.get_cookie("account", secret='some-secret-key')
     username = None
+    client_ip = None
     if cookie_content:
         username = cookie_content['username']
         client_ip = cookie_content['client-ip']
