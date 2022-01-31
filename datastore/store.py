@@ -1,7 +1,6 @@
 import os.path
 import json
 from sqlite3 import Error
-from data.config import Config
 from datastore.connection import Connection
 
 
@@ -16,7 +15,7 @@ class Store:
         data = None
         with open(file, 'r') as f:
             data = json.load(f)
-        if data is not None:
+        if data:
             for m in data["migrations"]:
                 if m["version"] > schema_version:
                     Store.execute_migration(m, conf)
@@ -39,10 +38,8 @@ class Store:
 
     @staticmethod
     def execute_migration(migration, conf):
-        print(f'Executing:\n{migration}')
         with Connection(conf) as db_connection:
             try:
-                print(f'still connected to {db_connection}')
                 c = db_connection.cursor()
                 sql = migration["sql"]
                 print(sql)
@@ -52,13 +49,6 @@ class Store:
                 c.execute(sql)
             except Error as err:
                 print(err)
-
-
-if __name__ == '__main__':
-    Config()
-    Store.migrate_db(Config.config)
-
-
 
 
 
