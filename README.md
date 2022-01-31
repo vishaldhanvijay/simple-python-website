@@ -4,9 +4,9 @@
 This is a Simple Python Website Project that can be used for prototyping web services. 
 This application is not very scalable nor data secure and thus should not be used in production.
 The project uses 
-- **bottle** as web server / adapter
-- **ngrok** as a way to publish the service
-- **sqlite3** as database
+- **bottle** as web server / adapter (http://bottlepy.org/docs/dev/)
+- **ngrok** as a way to publish the service (https://ngrok.com/)
+- **sqlite3** as database (https://www.sqlite.org/index.html)
 - **MD5** as password hashing method
 - **Signed cookies** and credentials stored in the database for authentication 
 - **Environment variables** for configuration

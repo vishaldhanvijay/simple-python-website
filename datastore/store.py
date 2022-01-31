@@ -1,8 +1,8 @@
 import os.path
+import json
 from sqlite3 import Error
 from data.config import Config
 from datastore.connection import Connection
-import json
 
 
 class Store:

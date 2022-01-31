@@ -19,9 +19,4 @@ def verify_hash(config, password, password_hash):
         return False
 
 
-def verify_user(username):
-    # conn = Store.instance.get_connection()
-    return True
-
-
 

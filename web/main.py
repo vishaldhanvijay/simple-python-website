@@ -1,11 +1,17 @@
+import os
 from bottle import run, install
 from bottle_sqlite import SQLitePlugin
 from data.config import Config
 from datastore.store import Store
+import errors
+import app
+import api
+
 
 Config()
 Store.migrate_db(Config.config)
 
-install(SQLitePlugin(dbfile=Config.config.db_filename))
+database_filename = os.path.join(Config.config.data_directory, Config.config.db_filename)
+install(SQLitePlugin(dbfile=database_filename))
 
 run(host='localhost', port=9999)
