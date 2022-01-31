@@ -1,2 +1,2 @@
-from app import login
-from app import main
+from app import static
+from app import errors
