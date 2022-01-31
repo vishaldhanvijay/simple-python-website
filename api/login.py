@@ -10,7 +10,6 @@ def check_login(db, username, password):
     return False
 
 
-#@view('login_result')
 @post('/login')
 def do_login(db):
     username = request.forms.get('username')
@@ -23,8 +22,6 @@ def do_login(db):
             'client-ip': request.remote_addr,
             'real-name': name
         }
-        print('setting cookie')
-        print(cookie_content)
         response.set_cookie("account", cookie_content, secret=Config.config.cookie_secret, max_age=10)
     else:
         username = None
@@ -41,8 +38,6 @@ def login():
 @view('restricted')
 def restricted_area():
     cookie_content = request.get_cookie("account", secret=Config.config.cookie_secret)
-    print('reading cookie')
-    print(cookie_content)
     name = None
     client_ip = None
     username = None

@@ -3,26 +3,43 @@ import os
 
 class Config:
 
+    config = None
+
     ENV_DATABASE_FILENAME = 'SPW_DATABASE_FILENAME'
     ENV_MIGRATIONS_FILENAME = 'SPW_MIGRATIONS_FILENAME'
     ENV_DATA_DIRECTORY = 'SPW_DATA_DIRECTORY'
     ENV_STATIC_FILES_DIRECTORY = 'SPW_STATIC_FILES_DIRECTORY'
     ENV_COOKIE_SECRET = 'SPW_COOKIE_SECRET'
     ENV_PASSWORD_SECRET = 'SPW_PASSWORD_SECRET'
+    ENV_PORT = 'SPW_PORT'
+    ENV_SESSION_TTL = 'SPW_SESSION_TTL'
 
-    config = None
+    defaults = dict(
+        SPW_DATABASE_FILENAME='test1.db',
+        SPW_MIGRATIONS_FILENAME='migrations.json',
+        SPW_DATA_DIRECTORY='/home/jarkko/git/simple-python-website/data',
+        SPW_STATIC_FILES_DIRECTORY='/home/jarkko/git/simple-python-website/static',
+        SPW_COOKIE_SECRET='some-secret-value',
+        SPW_PASSWORD_SECRET='some-other-secret-value',
+        SPW_PORT=9999,
+        SPW_SESSION_TTL=10
+    )
 
     def __init__(self,
-                 database_filename='test1.db',
-                 migrations_filename='migrations.json',
-                 data_directory='/home/jarkko/git/simple-python-website/data',
-                 static_files_directory='/home/jarkko/git/simple-python-website/static',
-                 cookie_secret='some-secret-value',
-                 password_secret='some-other-secret-value'):
-        self.db_filename = os.getenv(Config.ENV_DATABASE_FILENAME) or database_filename
-        self.migrations_filename = os.getenv(Config.ENV_MIGRATIONS_FILENAME) or migrations_filename
-        self.data_directory = os.getenv(Config.ENV_DATA_DIRECTORY) or data_directory
-        self.static_files_directory = os.getenv(Config.ENV_STATIC_FILES_DIRECTORY) or static_files_directory
-        self.cookie_secret = os.getenv(Config.ENV_COOKIE_SECRET) or cookie_secret
-        self.password_secret = os.getenv(Config.ENV_PASSWORD_SECRET) or password_secret
+                 database_filename=None,
+                 migrations_filename=None,
+                 data_directory=None,
+                 static_files_directory=None,
+                 cookie_secret=None,
+                 password_secret=None,
+                 port=None,
+                 session_ttl=None):
+        self.db_filename = database_filename or os.getenv(Config.ENV_DATABASE_FILENAME) or Config.defaults[Config.ENV_DATABASE_FILENAME]
+        self.migrations_filename = migrations_filename or os.getenv(Config.ENV_MIGRATIONS_FILENAME) or Config.defaults[Config.ENV_MIGRATIONS_FILENAME]
+        self.data_directory = data_directory or os.getenv(Config.ENV_DATA_DIRECTORY) or Config.defaults[Config.ENV_DATA_DIRECTORY]
+        self.static_files_directory = static_files_directory or os.getenv(Config.ENV_STATIC_FILES_DIRECTORY) or Config.defaults[Config.ENV_STATIC_FILES_DIRECTORY]
+        self.cookie_secret = cookie_secret or os.getenv(Config.ENV_COOKIE_SECRET) or Config.defaults[Config.ENV_COOKIE_SECRET]
+        self.password_secret = password_secret or os.getenv(Config.ENV_PASSWORD_SECRET) or Config.defaults[Config.ENV_PASSWORD_SECRET]
+        self.port = port or os.getenv(Config.ENV_PORT) or Config.defaults[Config.ENV_PORT]
+        self.session_ttl = session_ttl or os.getenv(Config.ENV_SESSION_TTL) or Config.defaults[Config.ENV_SESSION_TTL]
         Config.config = self

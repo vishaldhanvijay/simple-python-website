@@ -13,4 +13,4 @@ Store.migrate_db(Config.config)
 database_filename = os.path.join(Config.config.data_directory, Config.config.db_filename)
 install(SQLitePlugin(dbfile=database_filename))
 
-run(host='localhost', port=9999)
+run(host='localhost', port=Config.config.port)

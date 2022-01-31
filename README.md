@@ -5,7 +5,7 @@ This is a Simple Python Website Project that can be used for prototyping web ser
 This application is not very scalable nor data secure and thus should not be used in production.
 
 The project uses 
-- **ngrok** as a way to publish the service (https://ngrok.com/)
+- **ngrok** as a way to publish the service (no actual dependency) (https://ngrok.com/)
 - **bottle** as web server / adapter (http://bottlepy.org/docs/dev/)
 - **sqlite3** as database (https://www.sqlite.org/index.html)
 - **MD5** as password hashing method
@@ -41,6 +41,8 @@ Using environment variables (while developing edit data/config.py)
 - Set static files directory path (SPW_STATIC_FILES_DIRECTORY)
 - Set cookie secret (SPW_COOKIE_SECRET)
 - Set password hash key (SPW_PASSWORD_SECRET)
+
+Note: If environment variables are set, they override any / all default values
 
 ## Running the application
 Terminal 1
