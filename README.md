@@ -8,6 +8,9 @@ The project uses
 - **ngrok** as a way to publish the service (no actual dependency) (https://ngrok.com/)
 - **bottle** as web server / adapter (http://bottlepy.org/docs/dev/)
 - **sqlite3** as database (https://www.sqlite.org/index.html)
+- **vue.js** as frontend framework (https://vuejs.org/)
+- **axios** as http client (https://axios-http.com/)
+- **bootstrap 5** as style system (https://getbootstrap.com/)
 - **MD5** as password hashing method
 - **Signed cookies** and credentials stored in the database for authentication 
 - **Environment variables** for configuration

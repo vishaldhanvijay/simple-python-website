@@ -10,3 +10,7 @@ def index():
 @route('/static/<filename>')
 def server_static(filename):
     return static_file(filename, root=Config.config.static_files_directory)
+
+@route('/scripts/<filename>')
+def server_static(filename):
+    return static_file(filename, root=Config.config.static_files_directory+'/scripts')
