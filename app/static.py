@@ -1,16 +1,23 @@
-from bottle import route, static_file
+from bottle import static_file, get
 from data.config import Config
 
 
-@route('/')
+@get('/static/<filename>')
+def server_static(filename):
+    return static_file(filename, root=Config.config.static_files_directory)
+
+
+@get('/scripts/<filename>')
+def server_script(filename):
+    return static_file(filename, root=Config.config.static_files_directory+'/scripts')
+
+
+@get('/')
 def index():
     return server_static('index.html')
 
 
-@route('/static/<filename>')
-def server_static(filename):
-    return static_file(filename, root=Config.config.static_files_directory)
+@get('/login')
+def login():
+    return server_static('login.htm')
 
-@route('/scripts/<filename>')
-def server_static(filename):
-    return static_file(filename, root=Config.config.static_files_directory+'/scripts')

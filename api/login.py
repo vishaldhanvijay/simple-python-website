@@ -1,4 +1,4 @@
-from bottle import get, post, route, request, response, view, template
+from bottle import get, post, route, request, response, view
 from datastore import users
 from data.config import Config
 
@@ -10,7 +10,7 @@ def check_login(db, username, password):
     return False
 
 
-@post('/xhr-login')
+@post('/login')
 def do_login(db):
     username = request.json.get('username')
     password = request.json.get('password')
@@ -27,31 +27,6 @@ def do_login(db):
 
     response.headers['Content-type'] = 'application/json'
     return dict(login_success=login_success, name=name)
-
-
-
-@post('/login')
-def do_login(db):
-    username = request.forms.get('username')
-    password = request.forms.get('password')
-    name = None
-    if check_login(db, username, password):
-        name = users.get_user_name(db, username)
-        cookie_content = {
-            'username': username,
-            'client-ip': request.remote_addr,
-            'real-name': name
-        }
-        response.set_cookie("account", cookie_content, secret=Config.config.cookie_secret, max_age=10)
-    else:
-        username = None
-
-    return template('login_result', dict(username=username, name=name))
-
-
-@get('/login')
-def login():
-    return template('login_form')
 
 
 @route('/restricted')
