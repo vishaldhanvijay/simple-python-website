@@ -18,12 +18,27 @@ def verify_hash(config, password, password_hash):
         return False
 
 
-def get_user_name(db, username):
-    row = db.execute('SELECT firstname from users where username=?', (username,)).fetchone()
+def get_name_by_username(db, username):
+    user = user_by_username(db, username)
+    if user:
+        return f'{user["lastname"]}, {user["firstname"]}'
+    else:
+        return None
+
+
+def check_admin(db, username):
+    user = user_by_username(db, username)
+    if user:
+        return bool(user["is_admin"])
+    else:
+        return False
+
+
+def user_by_username(db, username):
+    row = db.execute('SELECT * from users where username=?', (username,)).fetchone()
     if row:
-        name = row['firstname']
-        if name and name != '':
-            return name
-        else:
-            return username
+        user = dict(row)
+        user.pop('password', None)
+        return user
+    return None
 

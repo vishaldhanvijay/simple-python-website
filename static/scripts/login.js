@@ -19,12 +19,16 @@ var login_app = new Vue({
                     this.isSuccess = true;
                     this.isFailed = false;
                     this.hasError = false;
-                    this.message = '<p>Login success!</p><p>Please proceed to the <a href="/restricted">RESTRICTED AREA</a>.</p>'
+                    this.username = '*******'
+                    this.password = '***********'
+                    this.message = 'Login success! Please proceed to the <a href="/restricted">RESTRICTED AREA</a>.'
                 } else {
                     this.isFailed = true;
                     this.isSuccess = false;
                     this.hasError = false;
-                    this.message = '<p>Login failed! Access denied.</p>'
+                    this.username = ''
+                    this.password = ''
+                    this.message = 'Login failed! Access denied.'
                 }
             })
             .catch(error => {

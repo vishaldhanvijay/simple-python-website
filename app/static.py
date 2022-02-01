@@ -21,3 +21,7 @@ def index():
 def login():
     return server_static('login.htm')
 
+
+@get('/restricted')
+def restricted_area():
+    return server_static("restricted.htm")
