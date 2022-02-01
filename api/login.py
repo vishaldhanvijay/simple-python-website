@@ -23,7 +23,7 @@ def do_login(db):
             'client-ip': request.remote_addr,
             'real-name': name
         }
-        response.set_cookie("account", cookie_content, secret=Config.config.cookie_secret, max_age=10)
+        response.set_cookie("account", cookie_content, secret=Config.config.cookie_secret, max_age=Config.config.session_ttl)
 
     response.headers['Content-type'] = 'application/json'
     return dict(login_success=login_success, name=name)

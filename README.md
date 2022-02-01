@@ -1,7 +1,7 @@
 # Simple Python Website Project
 
 ## General
-This is a Simple Python Website Project that can be used for prototyping web services. 
+This is a Simple Python Website Project that can be used for prototyping modern web services. 
 This application is not very scalable nor data secure and thus should not be used in production.
 
 The project uses 
@@ -23,7 +23,7 @@ Install dependencies
     $ source venv/bin/activate
     $ python3 -m pip install -r requirements.txt
 
-Update dependencies
+Update dependencies (if you make changes)
     
     $ cd simple-python-website
     $ source venv/bin/activate
@@ -44,6 +44,8 @@ Using environment variables (while developing edit data/config.py)
 - Set static files directory path (SPW_STATIC_FILES_DIRECTORY)
 - Set cookie secret (SPW_COOKIE_SECRET)
 - Set password hash key (SPW_PASSWORD_SECRET)
+- Set http port for the service (SPW_PORT)
+- Set session length / cookie TTL (SPW_SESSION_TTL)
 
 Note: If environment variables are set, they override any / all default values
 
