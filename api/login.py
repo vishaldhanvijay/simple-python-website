@@ -3,18 +3,11 @@ from datastore import users
 from data.config import Config
 
 
-def check_login(db, username, password):
-    row = db.execute('SELECT username, password from users where username=?', (username,)).fetchone()
-    if row:
-        return users.verify_hash(Config.config, password, row['password'])
-    return False
-
-
 @post('/login')
 def do_login(db):
     username = request.json.get('username')
     password = request.json.get('password')
-    login_success = check_login(db, username, password)
+    login_success = users.check_login(db, Config.config, username, password)
     if login_success:
         name = users.get_name_by_username(db, username)
         cookie_content = {

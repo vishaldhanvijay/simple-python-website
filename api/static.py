@@ -14,7 +14,7 @@ def server_script(filename):
 
 @get('/')
 def index():
-    return server_static('index.html')
+    return server_static('frontpage.htm')
 
 
 @get('/login')

@@ -18,6 +18,14 @@ def verify_hash(config, password, password_hash):
         return False
 
 
+def check_login(db, config, username, password):
+    password_hash = calculate_password_hash(config, password)
+    row = db.execute('SELECT count(id) from users where username=? and password=?', (username, password_hash)).fetchone()
+    if row:
+        return int(row[0]) > 0
+    return False
+
+
 def get_name_by_username(db, username):
     user = user_by_username(db, username)
     if user:

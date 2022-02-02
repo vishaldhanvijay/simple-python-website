@@ -15,10 +15,6 @@ class UsersTest(unittest.TestCase):
         assert self.correct_hash == users.calculate_password_hash(self.config, self.correct_password)
         assert self.correct_hash == users.calculate_password_hash(self.config, self.correct_password)
 
-    def test_password_verification(self):
-        assert users.verify_hash(self.config, self.correct_password, self.correct_hash)
-        assert not users.verify_hash(self.config, self.wrong_password, self.correct_hash)
-
     def test_password_hashes_are_different(self):
         assert users.calculate_password_hash(self.config, self.correct_password) != users.calculate_password_hash(self.config, self.wrong_password)
 

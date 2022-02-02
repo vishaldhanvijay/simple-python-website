@@ -73,3 +73,6 @@ Browser2
 Default password should be changed before publishing
  
     admin / admin-password
+
+## Todo
+- menu / SPA navigation / routing

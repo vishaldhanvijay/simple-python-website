@@ -27,7 +27,6 @@ class Store:
             try:
                 c = db_connection.cursor()
                 sql = 'select max(version) from migrations;'
-                print(sql)
                 row = c.execute(sql).fetchone()
                 if row:
                     schema_version = row[0]
