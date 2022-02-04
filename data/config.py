@@ -17,8 +17,8 @@ class Config:
     defaults = dict(
         SPW_DATABASE_FILENAME='test1.db',
         SPW_MIGRATIONS_FILENAME='migrations.json',
-        SPW_DATA_DIRECTORY='/home/jarkko/git/simple-python-website/data',
-        SPW_STATIC_FILES_DIRECTORY='/home/jarkko/git/simple-python-website/static',
+        SPW_DATA_DIRECTORY='data',                  # should be an absolute path
+        SPW_STATIC_FILES_DIRECTORY='static',        # should be an absolute path
         SPW_COOKIE_SECRET='some-secret-value',
         SPW_PASSWORD_SECRET='some-other-secret-value',
         SPW_PORT=9999,

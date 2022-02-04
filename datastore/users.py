@@ -10,14 +10,6 @@ def calculate_password_hash(config, password):
     return password_hash
 
 
-def verify_hash(config, password, password_hash):
-    calculated_hash = calculate_password_hash(config, password)
-    if calculated_hash == password_hash:
-        return True
-    else:
-        return False
-
-
 def check_login(db, config, username, password):
     password_hash = calculate_password_hash(config, password)
     row = db.execute('SELECT count(id) from users where username=? and password=?', (username, password_hash)).fetchone()

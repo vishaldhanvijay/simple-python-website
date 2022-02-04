@@ -8,7 +8,6 @@ class Store:
 
     @staticmethod
     def migrate_db(conf):
-        # todo check max version -> prevent duplicate migration
         schema_version = Store.check_schema_version(conf)
 
         file = os.path.join(conf.data_directory, conf.migrations_filename)

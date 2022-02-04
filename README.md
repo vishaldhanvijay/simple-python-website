@@ -9,9 +9,9 @@ The project uses
 - **bottle** as web server / adapter (http://bottlepy.org/docs/dev/)
 - **sqlite3** as database (https://www.sqlite.org/index.html)
 - **SQLitePlugin** as database access method
-- **vue.js** as frontend framework (https://vuejs.org/)
+- **vue.js** as frontend component framework (https://vuejs.org/)
+- **bootstrap 5** as frontend styling system (https://getbootstrap.com/)
 - **axios** as http client (https://axios-http.com/)
-- **bootstrap 5** as style system (https://getbootstrap.com/)
 - **MD5** as password hashing method
 - **Signed cookies** and credentials stored in the database for authentication 
 - **Environment variables** for configuration
@@ -75,4 +75,9 @@ Default password should be changed before publishing
     admin / admin-password
 
 ## Todo
-- menu / SPA navigation / routing
+- a few components
+  - SPA navigation
+  - modal with changing content
+- import / export for users -table
+  - admin only -authorization
+  - some sort of OR-mapping
