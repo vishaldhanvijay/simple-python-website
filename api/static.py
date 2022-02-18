@@ -25,3 +25,8 @@ def login():
 @get('/restricted')
 def restricted_area():
     return server_static("restricted.htm")
+
+
+@get('/admin')
+def admin_area():
+    return server_static("adminpage.htm")

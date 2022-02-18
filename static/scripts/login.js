@@ -21,7 +21,7 @@ var login_app = new Vue({
                     this.hasError = false;
                     this.username = '*******'
                     this.password = '***********'
-                    this.message = 'Login success! Please proceed to the <a href="/restricted">RESTRICTED AREA</a>.'
+                    this.message = 'Login success! Please proceed to the <a href="/restricted">RESTRICTED AREA</a> or <a href="/admin">ADMIN AREA</a>.'
                 } else {
                     this.isFailed = true;
                     this.isSuccess = false;

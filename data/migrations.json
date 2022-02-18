@@ -3,7 +3,7 @@
         {
             "version": 1,
             "comment": "created migrations table",
-            "sql": "create table if not exists migrations (\n    version integer primary key,\n    filename text not null,\n    migration_date text\n    );"
+            "sql": "create table if not exists migrations (\n    version integer primary key,\n    comment text not null,\n    migration_date text\n    );"
         },
         {
             "version": 2,
@@ -12,7 +12,7 @@
         },
         {
             "version": 3,
-            "comment": "added default admin user, default password is 'admin-password'",
+            "comment": "added default admin user, default password is \"admin-password\"",
             "sql": "insert into users(username, password, is_admin, created_at, firstname, lastname) values('admin', '4948b5e770c4703cfaf8cff5e04730b9', 1, CURRENT_TIMESTAMP, '', 'Administrator');"
         }
     ]

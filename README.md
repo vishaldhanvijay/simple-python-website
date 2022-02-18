@@ -75,9 +75,10 @@ Default password should be changed before publishing
     admin / admin-password
 
 ## Todo
-- a few components
-  - SPA navigation
-  - modal with changing content
-- import / export for users -table
-  - admin only -authorization
-  - some sort of OR-mapping
+- SPA navigation within region
+
+### Links
+- https://jsfiddle.net/yyx990803/xgrjzsup/
+- https://github.com/vuejs/vue-router/tree/dev/examples
+- https://router.vuejs.org/guide/#javascript
+ 
