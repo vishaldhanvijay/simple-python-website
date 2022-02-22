@@ -10,6 +10,16 @@ def calculate_password_hash(config, password):
     return password_hash
 
 
+def create_user(db, config, firstname, lastname, username, password):
+    password_hash = calculate_password_hash(config, password)
+    row_count = db.execute('INSERT INTO users(username, password, is_admin, created_at, firstname, lastname) values(?, ?, 0, CURRENT_TIMESTAMP, ?, ?);',
+                     (username, password_hash, firstname, lastname)).rowcount
+    if row_count > 0:
+        return True
+    else:
+        return False
+
+
 def check_login(db, config, username, password):
     password_hash = calculate_password_hash(config, password)
     row = db.execute('SELECT count(id) from users where username=? and password=?', (username, password_hash)).fetchone()
