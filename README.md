@@ -59,7 +59,7 @@ Terminal 1
 
 Terminal 2
 
-    $ python3 web/main.py
+    $ python3 main.py
 
 Browser1
 
@@ -77,9 +77,4 @@ Default password should be changed before publishing
 
 ## Todo
 - SPA navigation within region using vue router
-
-### Links
-- https://jsfiddle.net/yyx990803/xgrjzsup/
-- https://github.com/vuejs/vue-router/tree/dev/examples
-- https://router.vuejs.org/guide/#javascript
  
