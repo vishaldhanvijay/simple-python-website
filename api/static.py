@@ -7,6 +7,11 @@ def server_static(filename):
     return static_file(filename, root=Config.config.static_files_directory)
 
 
+@get('/scripts/components/<filename>')
+def server_script(filename):
+    return static_file(filename, root=Config.config.static_files_directory+'/scripts/components')
+
+
 @get('/scripts/<filename>')
 def server_script(filename):
     return static_file(filename, root=Config.config.static_files_directory+'/scripts')

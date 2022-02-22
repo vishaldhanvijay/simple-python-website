@@ -9,7 +9,8 @@ The project uses
 - **bottle** as web server / adapter (http://bottlepy.org/docs/dev/)
 - **sqlite3** as database (https://www.sqlite.org/index.html)
 - **SQLitePlugin** as database access method
-- **vue.js** as frontend component framework (https://vuejs.org/)
+- **vue.js 3** as frontend component framework (https://vuejs.org/)
+- **vue router 4** as SPA router (https://router.vuejs.org/guide/)
 - **bootstrap 5** as frontend styling system (https://getbootstrap.com/)
 - **axios** as http client (https://axios-http.com/)
 - **MD5** as password hashing method
@@ -75,7 +76,7 @@ Default password should be changed before publishing
     admin / admin-password
 
 ## Todo
-- SPA navigation within region
+- SPA navigation within region using vue router
 
 ### Links
 - https://jsfiddle.net/yyx990803/xgrjzsup/

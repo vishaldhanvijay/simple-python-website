@@ -1,9 +1,15 @@
-var admin_app = new Vue({
-      el: '#admin-app',
-      data: {
-        user: {},
-        logged_in: false,
-        logged_in_as_admin: false
+import CurrentUserInfo from './components/CurrentUserInfo.js'
+
+var admin_app = Vue.createApp({
+      components: {
+        CurrentUserInfo
+      },
+      data() {
+          return  {
+            user: {},
+            logged_in: false,
+            logged_in_as_admin: false
+          }
       },
       mounted () {
         axios.get('/user/current')
@@ -18,3 +24,5 @@ var admin_app = new Vue({
             });
         }
       });
+
+admin_app.mount('#admin-app')

@@ -1,12 +1,27 @@
-var login_app = new Vue({
-      el: '#login-app',
-      data: {
-        message: '',
-        username: '',
-        password: '',
-        hasError: false,
-        isSuccess: false,
-        isFailed: false
+const Login = { template: '<div>Login</div>' }
+const Register = { template: '<div>Register</div>' }
+
+const routes = [
+  { path: '/login-form', component: Login },
+  { path: '/registration-form', component: Register },
+];
+
+const router = VueRouter.createRouter({
+  history: VueRouter.createWebHashHistory(),
+  routes,
+});
+
+
+var login_app = Vue.createApp({
+      data(){
+        return {
+            message: '',
+            username: '',
+            password: '',
+            hasError: false,
+            isSuccess: false,
+            isFailed: false
+        }
       },
       methods: {
         postLogin: function(event) {
@@ -51,3 +66,5 @@ var login_app = new Vue({
       }
     });
 
+login_app.use(router)
+login_app.mount('#login-app')

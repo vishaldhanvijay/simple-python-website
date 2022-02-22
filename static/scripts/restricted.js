@@ -1,8 +1,14 @@
-var restricted_app = new Vue({
-      el: '#restricted-app',
-      data: {
-        user: {},
-        logged_in: false
+import CurrentUserInfo from './components/CurrentUserInfo.js'
+
+var restricted_app = Vue.createApp({
+      components: {
+        CurrentUserInfo
+      },
+      data() {
+          return {
+            user: {},
+            logged_in: false
+          }
       },
       mounted () {
         axios.get('/user/current')
@@ -16,3 +22,5 @@ var restricted_app = new Vue({
             });
         }
       });
+
+restricted_app.mount('#restricted-app')
