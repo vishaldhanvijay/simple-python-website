@@ -75,6 +75,4 @@ Default password should be changed before publishing
  
     admin / admin-password
 
-## Todo
-- SPA navigation within region using vue router
  
