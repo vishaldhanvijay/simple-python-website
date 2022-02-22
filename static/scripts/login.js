@@ -1,9 +1,9 @@
-const Login = { template: '<div>Login</div>' }
-const Register = { template: '<div>Register</div>' }
+import LoginForm from './components/LoginForm.js'
+import RegistrationForm from './components/RegistrationForm.js'
 
 const routes = [
-  { path: '/login-form', component: Login },
-  { path: '/registration-form', component: Register },
+  { path: '/', component: LoginForm },
+  { path: '/registration-form', component: RegistrationForm },
 ];
 
 const router = VueRouter.createRouter({

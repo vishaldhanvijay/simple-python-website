@@ -2,6 +2,8 @@ export default {
     data(){
         return {
             message: '',
+            firstname: '',
+            lastname: '',
             username: '',
             password: '',
             hasError: false,
@@ -10,26 +12,29 @@ export default {
         }
     },
     methods: {
-        postLogin: function(event) {
-            axios.post('/login', {
+        postRegistration: function(event) {
+            axios.post('/register', {
+                firstname: this.firstname,
+                lastname: this.lastname,
                 username: this.username,
                 password: this.password
             })
             .then(response => {
-                if (response.data.login_success) {
+                if (response.data.registration_success) {
                     this.isSuccess = true;
                     this.isFailed = false;
                     this.hasError = false;
+                    this.firstname = '*******'
+                    this.lastname = '*******'
                     this.username = '*******'
                     this.password = '***********'
-                    this.message = 'Login success! Please proceed to the <a href="/restricted">RESTRICTED AREA</a> or <a href="/admin">ADMIN AREA</a>.'
+                    this.message = 'Registration success! Please, <a href="/login">log in</a>.'
                 } else {
                     this.isFailed = true;
                     this.isSuccess = false;
                     this.hasError = false;
-                    this.username = ''
                     this.password = ''
-                    this.message = 'Login failed! Access denied.'
+                    this.message = 'Registration failed! ' + response.data.error_msg
                 }
             })
             .catch(error => {
@@ -50,9 +55,21 @@ export default {
             }
           }
       },
-      template:`<h1>&lt;Login&gt;</h1>
-            <form @submit.prevent="postLogin" id="loginform">
+      template:`<h1>&lt;Register&gt;</h1>
+            <form @submit.prevent="postRegistration" id="registrationform">
                 <fieldset v-bind:disabled="isSuccess">
+                    <div class="row justify-content-evenly">
+                        <div class="col-sm-4">
+                            <div class="row">First name:</div>
+                            <div class="row"><input v-model="firstname" type="text" autocomplete="firstname"/></div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-evenly">
+                        <div class="col-sm-4">
+                            <div class="row">Last name:</div>
+                            <div class="row"><input v-model="lastname" type="text" autocomplete="lastname"/></div>
+                        </div>
+                    </div>
                     <div class="row justify-content-evenly">
                         <div class="col-sm-4">
                             <div class="row">Username:</div>
@@ -68,18 +85,13 @@ export default {
                     </div>
                     <div class="row justify-content-evenly">
                         <div class="col-sm-4">
-                            <div class="row"><input value="Login" type="submit"/></div>
+                            <div class="row"><input value="Register" type="submit"/></div>
                         </div>
                     </div>
                     <div class="row justify-content-evenly">
                         <div class="col-sm-4">
-                            <div class="alert"  v-if="message" v-bind:class="messageClass" v-html="message"></div>
-                            <div>Not a member yet? Register <router-link to="/registration-form">HERE</router-link></div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-evenly">
-                        <div class="col-sm-4">
-
+                            <div class="alert" v-if="message" v-bind:class="messageClass" v-html="message"></div>
+                            <div>Already a member? Please <router-link to="/">log in</router-link></div>
                         </div>
                     </div>
                 </fieldset>
