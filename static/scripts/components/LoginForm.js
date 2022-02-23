@@ -74,7 +74,7 @@ export default {
                     <div class="row justify-content-evenly">
                         <div class="col-sm-4">
                             <div class="alert"  v-if="message" v-bind:class="messageClass" v-html="message"></div>
-                            <div>Not a member yet? Register <router-link to="/registration-form">HERE</router-link></div>
+                            <div v-if="!isSuccess">Not a member yet? Register <router-link to="/registration-form">here</router-link></div>
                         </div>
                     </div>
                     <div class="row justify-content-evenly">

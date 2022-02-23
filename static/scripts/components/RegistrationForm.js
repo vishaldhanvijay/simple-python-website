@@ -91,7 +91,7 @@ export default {
                     <div class="row justify-content-evenly">
                         <div class="col-sm-4">
                             <div class="alert" v-if="message" v-bind:class="messageClass" v-html="message"></div>
-                            <div>Already a member? Please <router-link to="/">log in</router-link></div>
+                            <div v-if="!isSuccess">Already a member? Please <router-link to="/">log in</router-link></div>
                         </div>
                     </div>
                 </fieldset>
