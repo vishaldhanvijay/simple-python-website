@@ -77,11 +77,6 @@ export default {
                             <div v-if="!isSuccess">Not a member yet? Register <router-link to="/registration-form">here</router-link></div>
                         </div>
                     </div>
-                    <div class="row justify-content-evenly">
-                        <div class="col-sm-4">
-
-                        </div>
-                    </div>
                 </fieldset>
             </form>`
 }
