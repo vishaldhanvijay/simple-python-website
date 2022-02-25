@@ -1,7 +1,7 @@
 # Simple Python Website Project
 
 ## General
-This is a Simple Python Website Project that can be used for prototyping modern web services. 
+This is a [Simple Python Website Project](https://github.com/darumor/simple-python-website) that can be used for prototyping modern web services. 
 This application is not very scalable nor data secure and thus should not be used in production.
 
 The project uses 
@@ -75,4 +75,13 @@ Default password should be changed before publishing
  
     admin / admin-password
 
- 
+## Todo
+There are still thing to do:
+- separate authdata from users - table
+- remove admin-account from migrations
+- add admin-account to testdata and proddata
+- two main.py's one for testing / developing and one for production, data-imports accordingly
+- maybe separate different services to different db's to simulate microservices
+- userroles and permissions in the cookie?
+  - maybe use a local session storage for the access token
+  - wrap axios into a wrapper that reads the local session storage
