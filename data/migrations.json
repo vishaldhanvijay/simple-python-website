@@ -8,16 +8,16 @@
         {
             "version": 2,
             "comment": "created users table",
-            "sql": "create table if not exists users (\n    id integer primary key autoincrement,\n    username text unique not null,\n    password text not null,\n    is_admin bit not null,\n    created_at text not null,\n    firstname text,\n    lastname text\n);"
+            "sql": "create table if not exists users (\n    id integer primary key autoincrement,\n    firstname text,\n    lastname text,\n    is_admin bit not null,\n    created_at text not null\n);"
         },
         {
             "version": 3,
-            "comment": "added default admin user, default password is \"admin-password\"",
-            "sql": "insert into users(username, password, is_admin, created_at, firstname, lastname) values('admin', '4948b5e770c4703cfaf8cff5e04730b9', 1, CURRENT_TIMESTAMP, '', 'Administrator');"
+            "comment": "created auth_methods table",
+            "sql": "create table if not exists auth_methods (\n    user_id integer,\n    username text unique not null,\n    password text not null,\n    type text not null, foreign key(user_id) references users(id));"
         },
         {
             "version": 4,
-            "comment": "Added table for things",
+            "comment": "created things table",
             "sql": "create table if not exists things(id integer primary key autoincrement, name text unique not null);"
         }
     ]

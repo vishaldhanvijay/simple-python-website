@@ -64,7 +64,7 @@ class Store:
                         for k in columns:
                             values.append(item[k])
                         cols = f'{columns}'[1:-1]
-                        vals = f'{values}'[1:-1]
+                        vals = f'{values}'[1:-1].replace("'CURRENT_TIMESTAMP'", "CURRENT_TIMESTAMP")
                         sql = f'insert into {table}({cols}) values ({vals});'
                         print(sql)
                         c.execute(sql)

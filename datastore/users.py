@@ -12,28 +12,31 @@ def calculate_password_hash(config, password):
 
 def create_user(db, config, firstname, lastname, username, password):
     password_hash = calculate_password_hash(config, password)
-    row_count = db.execute('INSERT INTO users(username, password, is_admin, created_at, firstname, lastname) values(?, ?, 0, CURRENT_TIMESTAMP, ?, ?);',
-                     (username, password_hash, firstname, lastname)).rowcount
-    if row_count > 0:
-        return True
-    else:
-        return False
+    cursor = db.execute(
+        'INSERT INTO users(firstname, lastname, created_at, is_admin) values(?, ?, CURRENT_TIMESTAMP, 0);',
+        (firstname, lastname))
+    row_count1 = cursor.rowcount
+    user_id = cursor.lastrowid
+
+    if row_count1 > 0:
+        row_count2 = db.execute(
+            "INSERT INTO auth_methods(user_id, username, password, type) values(?, ?, ?, 'USERNAME_AND_PASSWORD');",
+            (user_id, username, password_hash)).rowcount
+
+        if row_count2 > 0:
+            return True
+
+    return False
 
 
 def check_login(db, config, username, password):
     password_hash = calculate_password_hash(config, password)
-    row = db.execute('SELECT count(id) from users where username=? and password=?', (username, password_hash)).fetchone()
+    row = db.execute(
+        'SELECT user_id from auth_methods where username=? and password=? and type=\'USERNAME_AND_PASSWORD\'',
+        (username, password_hash)).fetchone()
     if row:
-        return int(row[0]) > 0
-    return False
-
-
-def get_name_by_username(db, username):
-    user = user_by_username(db, username)
-    if user:
-        return f'{user["lastname"]}, {user["firstname"]}'
-    else:
-        return None
+        return int(row['user_id'])
+    return -1
 
 
 def check_admin(db, username):
@@ -44,11 +47,22 @@ def check_admin(db, username):
         return False
 
 
-def user_by_username(db, username):
-    row = db.execute('SELECT * from users where username=?', (username,)).fetchone()
+def get_user_by_id(db, user_id):
+    row = db.execute('SELECT * from users where id=?', (user_id,)).fetchone()
     if row:
         user = dict(row)
-        user.pop('password', None)
         return user
     return None
 
+
+def user_by_username(db, username):
+    user_id = user_id_by_username(db, username)
+    return get_user_by_id(db, user_id)
+
+
+def user_id_by_username(db, username):
+    row = db.execute("SELECT user_id from auth_methods where username=? and type='USERNAME_AND_PASSWORD'", (username,)).fetchone()
+    if row:
+        user_id = int(row["user_id"])
+        return user_id
+    return None

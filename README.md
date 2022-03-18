@@ -61,6 +61,10 @@ Terminal 2
 
     $ python3 main.py
 
+Terminal 3
+
+    $ python3 test/import_test_data.py
+
 Browser1
 
     http://localhost:9999
@@ -71,17 +75,18 @@ Browser2
 
 ## Defaults
 ### Default admin credentials
-Default password should be changed before publishing
+Default password should be changed before publishing (only present in the test data now)
  
     admin / admin-password
 
 ## Todo
 There are still thing to do:
-- separate authdata from users - table
-- remove admin-account from migrations
-- add admin-account to testdata and proddata
-- two main.py's one for testing / developing and one for production, data-imports accordingly
+- auth_methods to its own store (separate from users)
+- primary key to auth_methods
+- user creation into one [transaction](https://www.sqlite.org/lang_transaction.html)
 - maybe separate different services to different db's to simulate microservices
+  - auth, userdata, things 
 - userroles and permissions in the cookie?
   - maybe use a local session storage for the access token
   - wrap axios into a wrapper that reads the local session storage
+- Google OAuth [frontend](https://developers.google.com/identity/sign-in/web/sign-in) [backend](https://developers.google.com/identity/sign-in/web/backend-auth) 

@@ -7,9 +7,11 @@ from data.config import Config
 def do_login(db):
     username = request.json.get('username')
     password = request.json.get('password')
-    login_success = users.check_login(db, Config.config, username, password)
-    if login_success:
-        name = users.get_name_by_username(db, username)
+    user_id = users.check_login(db, Config.config, username, password)
+    user = None
+    if user_id > 0:
+        user = users.get_user_by_id(db, user_id)
+        name = f"{user['firstname']} {user['lastname']}"
         cookie_content = {
             'username': username,
             'client-ip': request.remote_addr,
@@ -18,7 +20,7 @@ def do_login(db):
         response.set_cookie("account", cookie_content, secret=Config.config.cookie_secret, max_age=Config.config.session_ttl)
 
     response.headers['Content-type'] = 'application/json'
-    return dict(login_success=login_success)
+    return dict(login_success=user is not None)
 
 
 @post('/register')
